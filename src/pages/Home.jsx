@@ -1,6 +1,7 @@
 import React from 'react'
 import Player from '../Components/Player/Player'
 import Tic_Tac from "../assets/game-logo.png"
+import GameBoard from '../Components/GameBoard/GameBoard'
 
 const Home = () => {
   return (
@@ -24,7 +25,7 @@ const Home = () => {
             <Player initialName="Player 1" symbol="X" />
             <Player initialName="Player 2" symbol="O" />
           </ol>
-          Game Board
+          <GameBoard/>
         </div>
         Log
       </main>
