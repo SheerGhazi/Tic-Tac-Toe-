@@ -1,15 +1,26 @@
-const initailBoard = [
+import { useState } from "react";
+
+import React from "react";
+
+const initialBoard = [
   [null, null, null],
   [null, null, null],
   [null, null, null],
 ];
 
-import React from "react";
-
 const GameBoard = () => {
+  const [gameBoard, setGameBoard] = useState(initailBoard)
+
+  function handleSelectSquare(){
+    setGameBoard((prevGameBoard)=>{
+      
+    });
+  }
+
+
   return (
     <ol className="grid grid-cols-3 gap-4 max-w-xs mx-auto mt-10">
-      {initailBoard.map((row, rowIndex) => (
+      {initialBoard.map((row, rowIndex) => (
         <li  key={rowIndex}>
           <ol>
             {row.map((playerSymbol, colIndex) => (
@@ -26,3 +37,7 @@ const GameBoard = () => {
 };
 
 export default GameBoard;
+
+
+
+m,nmnv
