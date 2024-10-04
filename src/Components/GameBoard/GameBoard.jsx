@@ -9,6 +9,7 @@ const initialBoard = [
 ];
 
 const GameBoard = () => {
+  
   const [gameBoard, setGameBoard] = useState(initailBoard)
 
   function handleSelectSquare(){
