@@ -12,9 +12,10 @@ const GameBoard = () => {
   
   const [gameBoard, setGameBoard] = useState(initailBoard)
 
-  function handleSelectSquare(){
+  function handleSelectSquare(rowIndex,colIndex){
     setGameBoard((prevGameBoard)=>{
-      
+      prevGameBoard[rowIndex][colIndex]="X";
+      return prevGameBoard;
     });
   }
 
@@ -41,4 +42,3 @@ export default GameBoard;
 
 
 
-m,nmnv
