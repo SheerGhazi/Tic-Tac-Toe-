@@ -19,7 +19,7 @@ const Player = ({initialName,symbol}) => {
         let editablePlayerName = <span className="text-lg font-semibold tracking-wider">{playerName}</span>;
 
         if(isEditing  ){
-            editablePlayerName = <input className="bg-gray-600" type="text" defaultValue={playerName} onChange={handleChange} />
+            editablePlayerName = <input className="bg-gray-600" type="text" defaultValue={playerName} onChange= {handleChange} />
 
         }
 
