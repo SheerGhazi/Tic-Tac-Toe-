@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-const Player = ({initialName,symbol}) => {
+const Player = ({initialName,symbol, isActive}) => {
     const [isEditing, setisEditing] = useState(false)
     const [playerName, setplayerName] = useState(initialName)
 
@@ -27,7 +27,7 @@ const Player = ({initialName,symbol}) => {
   return (
     <>
       {" "}
-      <li className="flex justify-around items-center  w-1/2">
+      <li className={`flex justify-around items-center w-1/2 ${isActive ? 'active' : ''}`}>
         <span className="flex justify-between items-center space-x-6">
           {editablePlayerName}
           <span>{symbol}</span>

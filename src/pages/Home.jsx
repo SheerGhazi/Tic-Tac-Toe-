@@ -26,9 +26,9 @@ const Home = () => {
 
       <main>
         <div className="game-container container mx-auto w-1/2 bg-gray-900 text-white p-6 rounded-xl ">
-          <ol className="flex justify-between border border-blue-600  ">
-            <Player  initialName="Player 1" symbol="X" />
-            <Player initialName="Player 2" symbol="O" />
+          <ol className="flex justify-between  ">
+            <Player  initialName="Player 1" symbol="X" isActive={activePlayer === 'X'} />
+            <Player initialName="Player 2" symbol="O"  isActive={activePlayer === 'O'} />
           </ol>
           <GameBoard  onSelectSquare={handleSelectSquare} />
         </div>
