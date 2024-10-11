@@ -22,6 +22,8 @@ const Home = () => {
         >
           Tic Tac Toe
         </h1>
+
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem provident a soluta reprehenderit maxime voluptas mollitia, quae, voluptatem doloremque magni repellendus? Inventore exercitationem explicabo necessitatibus distinctio, ratione deleniti fuga? Quaerat?</p>
       </div>
 
       <main>
@@ -33,6 +35,7 @@ const Home = () => {
           <GameBoard  onSelectSquare={handleSelectSquare} />
         </div>
         Log
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui maiores vitae sunt repellat eligendi explicabo harum, impedit, autem labore ipsa repellendus. Corrupti, ullam! Ad, vero veritatis. Nemo cum facilis ab?</p>
       </main>
     </div>
   )
