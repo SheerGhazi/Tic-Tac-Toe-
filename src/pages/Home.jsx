@@ -36,6 +36,15 @@ const Home = () => {
         </div>
         Log
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui maiores vitae sunt repellat eligendi explicabo harum, impedit, autem labore ipsa repellendus. Corrupti, ullam! Ad, vero veritatis. Nemo cum facilis ab?</p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
       </main>
     </div>
   )
