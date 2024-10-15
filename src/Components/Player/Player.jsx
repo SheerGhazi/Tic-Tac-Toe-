@@ -27,7 +27,7 @@ const Player = ({initialName,symbol, isActive}) => {
   return (
     <>
       {" "}
-      <li className={`flex justify-around items-center w-1/2 ${isActive ? 'active' : ''}`}>
+      <li className={`flex justify-around items-center w-1/2 ${isActive ? 'border-2 border-yellow-400' : ''}`}>
         <span className="flex justify-between items-center space-x-6">
           {editablePlayerName}
           <span>{symbol}</span>
