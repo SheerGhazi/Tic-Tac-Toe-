@@ -3,12 +3,24 @@ import React from 'react'
 import Player from '../Components/Player/Player'
 import Tic_Tac from "../assets/game-logo.png"
 import GameBoard from '../Components/GameBoard/GameBoard'
+import Log from '../Components/Log/Log'
 
 const Home = () => {
+   const [gameTurn, setGameTurn] =  useState([]);
   const [activePlayer, setActivePlayer] = useState("X")
 
-  function handleSelectSquare(){
+  function handleSelectSquare(rowIndex,colIndex){
       setActivePlayer((curActivePlayer)=> curActivePlayer === "X" ? "O" : "X" )
+      setGameTurn(prevTurn => {
+
+        let currentPlayer = "X";
+        if (prevTurn.length>0 &&  prevTurn[0].player === 'X'){
+          currentPlayer = '0';
+        }
+
+
+        const updatedTurn = [{row: rowIndex , col: colIndex, player: activePlayer},...prevTurn]
+      });
   }
 
 
@@ -32,7 +44,7 @@ const Home = () => {
           </ol>
           <GameBoard  onSelectSquare={handleSelectSquare} activePlayerSymbol={activePlayer} />
         </div>
-       
+       <Log/>
         
       </main>
     </div>
