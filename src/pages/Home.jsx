@@ -5,6 +5,7 @@ import Tic_Tac from "../assets/game-logo.png";
 import GameBoard from "../Components/GameBoard/GameBoard";
 import Log from "../Components/Log/Log";
 import { WINNING_COMBINATIONS } from "../Components/WinningCombination/winning-combination";
+import GameOver from "../Components/GameOver/GameOver";
 
 const initialBoard = [
   [null, null, null],
@@ -37,11 +38,19 @@ const Home = () => {
     gameBoard [row] [col] = player;
   }
 
+let winner = null;
+
   for ( const  combination of WINNING_COMBINATIONS ){
-    const firstSquareSymbol
-    const secondSquareSymbol
-    const thirdSquareSymbol
+    const firstSquareSymbol = gameBoard[combination[0].row][combination[0].column]
+    const secondSquareSymbol = gameBoard[combination[1].row][combination[1].column]
+    const thirdSquareSymbol = gameBoard[combination[2].row][combination[2].column]
+
+    if( firstSquareSymbol && firstSquareSymbol === secondSquareSymbol && firstSquareSymbol === thirdSquareSymbol){
+        winner = firstSquareSymbol;
+    }
   }
+
+  const hasDraw = gameTurns.length === 9 && !winner;
 
   function handleSelectSquare(rowIndex, colIndex) {
     // setActivePlayer((curActivePlayer)=> curActivePlayer === 'X' ? 'O' : 'X' )
@@ -82,6 +91,7 @@ const Home = () => {
               isActive={activePlayer === "O"}
             />
           </ol>
+          { (winner || hasDraw) && <GameOver winner={winner} />}
           <GameBoard onSelectSquare={handleSelectSquare} board={gameBoard} />
         </div>
         <Log turns={gameTurns} />

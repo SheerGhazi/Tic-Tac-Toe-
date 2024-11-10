@@ -6,20 +6,6 @@ import React from "react";
 
 const GameBoard = ({ onSelectSquare,  board  } ) => {
   
-  // const [gameBoard, setGameBoard] = useState(initialBoard)
-
-  // function handleSelectSquare(rowIndex,colIndex){
-  //   setGameBoard((prevGameBoard)=>{
-  //     const updatedBoard = [...prevGameBoard.map(innerArray =>[...innerArray])]
-  //     updatedBoard [rowIndex] [colIndex] = activePlayerSymbol ;
-  //     return updatedBoard;
-  //   });
-
-  //   onSelectSquare();
-  
-
-  
-
 
   return (
     <ol className="grid grid-cols-3 gap-4 max-w-xs mx-auto mt-10">
