@@ -24,13 +24,18 @@ function deriveActivePlayer(gameTurns) {
 }
 
 const Home = () => {
+  const [players, setPlayers] = useState({
+    'x': 'player 1',
+    'o': 'player 2'
+  });
+
   const [gameTurns, setGameTurns] = useState([]);
   // const [hasWinner, setHasWinner] = useState(false)
   // const [activePlayer, setActivePlayer] = useState('X');
 
   const activePlayer = deriveActivePlayer(gameTurns);
 
-  let gameBoard = initialBoard;
+  let gameBoard = [...initialBoard.map(array => [...array])];
   for(const turn of gameTurns){
     const { square, player} = turn;
     const { row,col} =square;
@@ -46,7 +51,7 @@ let winner = null;
     const thirdSquareSymbol = gameBoard[combination[2].row][combination[2].column]
 
     if( firstSquareSymbol && firstSquareSymbol === secondSquareSymbol && firstSquareSymbol === thirdSquareSymbol){
-        winner = firstSquareSymbol;
+        winner = players[firstSquareSymbol];
     }
   }
 
@@ -64,6 +69,19 @@ let winner = null;
       return updatedTurns;
     });
   }
+
+  function handleRestartMatch (){
+    setGameTurns([]);
+  }
+
+  function handlePlayerNameChange (symbol, newName){
+    setPlayer(prevPlayer => {
+      return {
+        ...prevPlayer,
+        [symbol]: newName;
+      };
+    });
+    
 
   return (
     <div className="w-full min-h-screen bg-custom-gradient ">
@@ -84,14 +102,16 @@ let winner = null;
               initialName="Player 1"
               symbol="X"
               isActive={activePlayer === "X"}
+              onChangeName={handlePlayerNameChange}
             />
             <Player
               initialName="Player 2"
               symbol="O"
               isActive={activePlayer === "O"}
+              onChangeName={handlePlayerNameChange}
             />
           </ol>
-          { (winner || hasDraw) && <GameOver winner={winner} />}
+          { (winner || hasDraw) && <GameOver winner={winner} onRestart={handleRestartMatch} />}
           <GameBoard onSelectSquare={handleSelectSquare} board={gameBoard} />
         </div>
         <Log turns={gameTurns} />
