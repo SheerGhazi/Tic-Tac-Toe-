@@ -13,11 +13,9 @@ const initialBoard = [
   [null, null, null],
 ];
 
-
-
 function deriveActivePlayer(gameTurns) {
   let currentPlayer = "X";
-  if (gameTurns.length > 0 && gameTurns[0].player === "X") {
+  if (gameTurns.length % 2 !== 0) {
     currentPlayer = "O";
   }
   return currentPlayer;
@@ -25,43 +23,49 @@ function deriveActivePlayer(gameTurns) {
 
 const Home = () => {
   const [players, setPlayers] = useState({
-    'x': 'player 1',
-    'o': 'player 2'
+    x: "player 1",
+    o: "player 2",
   });
 
   const [gameTurns, setGameTurns] = useState([]);
-  // const [hasWinner, setHasWinner] = useState(false)
-  // const [activePlayer, setActivePlayer] = useState('X');
 
   const activePlayer = deriveActivePlayer(gameTurns);
 
-  let gameBoard = [...initialBoard.map(array => [...array])];
-  for(const turn of gameTurns){
-    const { square, player} = turn;
-    const { row,col} =square;
-
-    gameBoard [row] [col] = player;
+  let gameBoard = [...initialBoard.map((array) => [...array])];
+  for (const turn of gameTurns) {
+    const { square, player } = turn;
+    const { row, col } = square;
+    gameBoard[row][col] = player;
   }
 
-let winner = null;
+  const getWinner = () => {
+    let winner = null;
+    for (const combination of WINNING_COMBINATIONS) {
+      const firstSquareSymbol =
+        gameBoard[combination[0].row][combination[0].column];
+      const secondSquareSymbol =
+        gameBoard[combination[1].row][combination[1].column];
+      const thirdSquareSymbol =
+        gameBoard[combination[2].row][combination[2].column];
 
-  for ( const  combination of WINNING_COMBINATIONS ){
-    const firstSquareSymbol = gameBoard[combination[0].row][combination[0].column]
-    const secondSquareSymbol = gameBoard[combination[1].row][combination[1].column]
-    const thirdSquareSymbol = gameBoard[combination[2].row][combination[2].column]
-
-    if( firstSquareSymbol && firstSquareSymbol === secondSquareSymbol && firstSquareSymbol === thirdSquareSymbol){
-        winner = players[firstSquareSymbol];
+      if (
+        firstSquareSymbol &&
+        firstSquareSymbol === secondSquareSymbol &&
+        firstSquareSymbol === thirdSquareSymbol
+      ) {
+        winner = players[firstSquareSymbol.toLowerCase()];
+      }
     }
-  }
 
+    return winner;
+  };
+
+  const winner = getWinner();
   const hasDraw = gameTurns.length === 9 && !winner;
 
   function handleSelectSquare(rowIndex, colIndex) {
-    // setActivePlayer((curActivePlayer)=> curActivePlayer === 'X' ? 'O' : 'X' )
     setGameTurns((prevTurns) => {
       const currentPlayer = deriveActivePlayer(prevTurns);
-
       const updatedTurns = [
         { square: { row: rowIndex, col: colIndex }, player: currentPlayer },
         ...prevTurns,
@@ -70,34 +74,27 @@ let winner = null;
     });
   }
 
-  function handleRestartMatch (){
+  function handleRestartMatch() {
     setGameTurns([]);
   }
 
-  function handlePlayerNameChange (symbol, newName){
-    setPlayer(prevPlayer => {
-      return {
-        ...prevPlayer,
-        [symbol]: newName;
-      };
-    });
-    
+  function handlePlayerNameChange(symbol, newName) {
+    setPlayers((prevPlayers) => ({
+      ...prevPlayers,
+      [symbol.toLowerCase()]: newName,
+    }));
+  }
 
   return (
     <div className="w-full min-h-screen bg-custom-gradient ">
       <div className=" flex flex-col justify-center items-center py-12">
         <img className="size-24" src={Tic_Tac} alt="" />
-        <h1
-          className="font-bold text-lg text-white
-        "
-        >
-          Tic Tac Toe
-        </h1>
+        <h1 className="font-bold text-lg text-white">Tic Tac Toe</h1>
       </div>
 
       <main>
         <div className="game-container container mx-auto w-1/2 bg-gray-900 text-white p-6 rounded-xl ">
-          <ol className="flex justify-between  ">
+          <ol className="flex justify-between">
             <Player
               initialName="Player 1"
               symbol="X"
@@ -111,7 +108,10 @@ let winner = null;
               onChangeName={handlePlayerNameChange}
             />
           </ol>
-          { (winner || hasDraw) && <GameOver winner={winner} onRestart={handleRestartMatch} />}
+          {winner && <GameOver winner={winner} onRestart={handleRestartMatch} />}
+          {hasDraw && !winner && (
+            <GameOver winner={"It's a draw"} onRestart={handleRestartMatch} />
+          )}
           <GameBoard onSelectSquare={handleSelectSquare} board={gameBoard} />
         </div>
         <Log turns={gameTurns} />
